@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>閃電賣坤滿額抽獎活動</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #fff6e0, #fff9f0);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff0000, #ffd700);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #c40000;
+      border-left: 6px solid #ffcc00;
+      padding-left: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 2px solid #ffcc00;
+    }
+
+    th {
+      background: #ff0000;
+      color: white;
+    }
+
+    td {
+      padding: 10px;
+      text-align: center;
+      background: #fff8e1;
+    }
+
+    .draw-section {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .draw-button {
+      background: linear-gradient(to right, #ff0000, #ffd700);
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 2px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .result-box {
+      display: none;
+      margin-top: 50px;
+      text-align: center;
+      padding: 40px;
+      background: #fff8cc;
+      border: 2px solid #ffcc00;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .result-box h1 {
+      font-size: 26px;
+      color: #ff0000;
+    }
+
+    .result-box p {
+      font-size: 22px;
+      margin-top: 15px;
+    }
+
+    .reset-button {
+      margin-top: 25px;
+      font-size: 18px;
+      padding: 10px 30px;
+      background: #ffd700;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>閃電賣坤滿額抽獎活動</header>
+
+<div class="container" id="main">
+  <h2>活動說明</h2>
+  <p>每消費 <strong>50 元</strong> 可獲得 <strong>1 閃電</strong>，集滿 <strong>10 閃電</strong> 可抽一次！</p>
+  <p>無上限，買越多，抽越多！</p>
+
+  <h2>獎項一覽</h2>
+  <table>
+    <tr>
+      <th>獎項</th>
+      <th>內容物</th>
+      <th>價值</th>
+    </tr>
+    <tr><td>A獎</td><td>高性能平板電腦</td><td>$15,000</td></tr>
+    <tr><td>B獎</td><td>藍牙耳機</td><td>$3,000</td></tr>
+    <tr><td>C獎</td><td>行動電源</td><td>$1,000</td></tr>
+    <tr><td>D獎</td><td>充電組</td><td>$200</td></tr>
+    <tr><td>E獎</td><td>銘謝惠顧</td><td>-</td></tr>
+  </table>
+
+  <div class="draw-section">
+    <button class="draw-button" onclick="drawPrize()">抽一次！</button>
+  </div>
+</div>
+
+<div class="result-box" id="resultBox">
+  <h1>抽獎結果</h1>
+  <p id="resultText">你抽中了：？</p>
+  <button class="reset-button" onclick="resetPage()">再抽一次</button>
+</div>
+
+<script>
+  const prizes = [
+    { name: "A獎 - 平板電腦", chance: 1 },
+    { name: "B獎 - 藍牙耳機", chance: 4 },
+    { name: "C獎 - 行動電源", chance: 10 },
+    { name: "D獎 - 充電組", chance: 30 },
+    { name: "E獎 - 銘謝惠顧", chance: 55 }
+  ];
+
+  function drawPrize() {
+    const rand = Math.random() * 100;
+    let sum = 0;
+    let selected = "E獎 - 銘謝惠顧"; // 預設
+
+    for (let prize of prizes) {
+      sum += prize.chance;
+      if (rand < sum) {
+        selected = prize.name;
+        break;
+      }
+    }
+
+    document.getElementById("resultText").textContent = `你抽中了：${selected}`;
+    document.getElementById("main").style.display = "none";
+    document.getElementById("resultBox").style.display = "block";
+  }
+
+  function resetPage() {
+    document.getElementById("main").style.display = "block";
+    document.getElementById("resultBox").style.display = "none";
+  }
+</script>
+
+</body>
+</html>
